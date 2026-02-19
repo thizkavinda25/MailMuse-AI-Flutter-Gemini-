@@ -1,0 +1,17 @@
+import 'package:flutter/material.dart';
+
+class AppColors {
+  AppColors._();
+
+  static const Color primary = Color.fromRGBO(255, 255, 255, 1);
+  static const Color hintTextColor = Color.fromRGBO(158, 158, 158, 1);
+  static const Color background = Color(0xFFF5F5F5);
+  static const Color rowIconColor = Color.fromRGBO(97, 97, 97, 1);
+  static const Color generatedEmailFont = Color.fromRGBO(66, 66, 66, 1);
+  static const Color subTextColor = Color.fromARGB(255, 100, 143, 235);
+  static const Color circleAvatarBackground = Color.fromRGBO(227, 242, 253, 1);
+  static const Color bottomNavSelectColor = Color.fromARGB(255, 72, 77, 225);
+
+  static const Color black = Colors.black;
+  
+}

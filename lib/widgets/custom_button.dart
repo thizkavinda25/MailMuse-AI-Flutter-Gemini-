@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mail_muse/constants/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -8,32 +9,30 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        height: 55,
+        height: screenHeight * 0.07,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF7C5FFF), Color(0xFF6B4DFF)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(screenWidth * 0.05),
         ),
         child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                text,
-                style: GoogleFonts.roboto(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              ),
-            ],
+          child: Text(
+            text,
+            style: GoogleFonts.roboto(
+              fontSize: screenHeight * 0.022,
+              fontWeight: FontWeight.w600,
+              color: AppColors.primary,
+            ),
           ),
         ),
       ),

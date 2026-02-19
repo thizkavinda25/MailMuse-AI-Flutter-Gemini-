@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:mail_muse/constants/app_colors.dart';
+import 'package:mail_muse/widgets/bottom_row_buttons.dart';
 import 'package:provider/provider.dart';
 import 'package:mail_muse/widgets/custom_app_bar.dart';
 import 'package:mail_muse/widgets/custom_button.dart';
@@ -23,12 +26,16 @@ class _HomeScreenState extends State<HomeScreen> {
     final provider = Provider.of<EmailProvider>(context);
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: AppColors.background,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child: CustomAppBar(),
+      ),
+
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustomAppBar(),
             SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -45,14 +52,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(height: 15),
                   TextField(
                     controller: topicController,
+                    onTapOutside: (_) {
+                      FocusScope.of(context).unfocus();
+                    },
                     maxLines: 4,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: AppColors.primary,
                       hintText: 'e.g. Leave request for 3 days due to illness',
                       hintStyle: GoogleFonts.roboto(
                         fontSize: 16,
-                        color: Colors.grey.shade500,
+                        color: AppColors.hintTextColor,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -63,23 +73,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(height: 30),
                   CustomButton(
                     text: 'Generate Email',
-                    onTap: () => provider.generateEmail(
-                      topicController.text,
-                      topicController,
-                    ),
+                    onTap: () async {
+                      await provider.generateEmail(
+                        topicController.text,
+                        context,
+                      );
+                      if (provider.generatedEmail.isNotEmpty &&
+                          !provider.generatedEmail.contains("Error")) {
+                        topicController.clear();
+                      }
+                    },
                   ),
                   SizedBox(height: 30),
-                  _subText('Generated Email'),
+                  if (provider.generatedEmail.isNotEmpty)
+                    _subText('Generated Email'),
                   SizedBox(height: 15),
-        
+
                   if (provider.isLoading)
-                    Center(child: CircularProgressIndicator()),
-        
+                    Center(
+                      child: Lottie.asset(
+                        'assets/lottie/loading.json',
+                        repeat: true,
+                        height: 150,
+                      ),
+                    ),
+
                   if (provider.generatedEmail.isNotEmpty)
                     Container(
                       padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.primary,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -98,11 +121,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               GestureDetector(
                                 onTap: () {
                                   Clipboard.setData(
-                                    ClipboardData(text: provider.generatedEmail),
+                                    ClipboardData(
+                                      text: provider.generatedEmail,
+                                    ),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                      content: Text("Email copied successfully"),
+                                      content: Text(
+                                        "Email copied successfully",
+                                      ),
                                     ),
                                   );
                                 },
@@ -111,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Icon(
                                       Icons.copy,
                                       size: 18,
-                                      color: Colors.grey.shade700,
+                                      color: AppColors.rowIconColor,
                                     ),
                                     SizedBox(width: 6),
                                     Text(
@@ -119,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       style: GoogleFonts.roboto(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
-                                        color: Colors.grey.shade700,
+                                        color: AppColors.rowIconColor,
                                       ),
                                     ),
                                   ],
@@ -132,12 +159,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             provider.generatedEmail,
                             style: GoogleFonts.roboto(
                               fontSize: 16,
-                              color: Colors.grey.shade800,
+                              color: AppColors.generatedEmailFont,
                             ),
                           ),
                         ],
                       ),
                     ),
+                  SizedBox(height: 20),
+                  if (provider.generatedEmail.isNotEmpty)
+                    BottomRowButtons(
+                      onClear: () {
+                        provider.removeGeneratedEmail();
+                      },
+                      onShare: () {
+                        provider.shareGeneratedEmail(context);
+                      },
+                    ),
+                  SizedBox(height: 20),
                 ],
               ),
             ),
