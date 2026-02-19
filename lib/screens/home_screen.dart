@@ -20,6 +20,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController topicController = TextEditingController();
+  final poppins = GoogleFonts.poppins();
+  final roboto = GoogleFonts.roboto();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       filled: true,
                       fillColor: AppColors.primary,
                       hintText: 'e.g. Leave request for 3 days due to illness',
-                      hintStyle: GoogleFonts.roboto(
+                      hintStyle: roboto.copyWith(
                         fontSize: 16,
                         color: AppColors.hintTextColor,
                       ),
@@ -93,6 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Center(
                       child: Lottie.asset(
                         'assets/lottie/loading.json',
+                        filterQuality: FilterQuality.high,
                         repeat: true,
                         height: 150,
                       ),
@@ -157,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(height: 10),
                           SelectableText(
                             provider.generatedEmail,
-                            style: GoogleFonts.roboto(
+                            style: roboto.copyWith(
                               fontSize: 16,
                               color: AppColors.generatedEmailFont,
                             ),

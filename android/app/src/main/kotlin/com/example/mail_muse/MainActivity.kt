@@ -1,4 +1,4 @@
-package com.example.mail_muse
+package app.ai.mailmuse
 
 import io.flutter.embedding.android.FlutterActivity
 

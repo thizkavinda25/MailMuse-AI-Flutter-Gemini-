@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:mail_muse/screens/main_body.dart';
+import 'package:mail_muse/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mail_muse/providers/email_provider.dart';
 
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: const MainBody(),
+        home: const SplashScreen(),
       ),
     );
   }

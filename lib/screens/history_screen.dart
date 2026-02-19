@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mail_muse/constants/app_colors.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -11,6 +12,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primary,
       body: Center(child: Text('This page is under development')),
     );
   }

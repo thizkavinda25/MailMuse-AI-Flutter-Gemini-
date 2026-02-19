@@ -16,7 +16,7 @@
     </queries>
 
     <application
-        android:label="mail_muse"
+        android:label="Mail Muse"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
