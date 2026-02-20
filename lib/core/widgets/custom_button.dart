@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mail_muse/constants/app_colors.dart';
+import 'package:mail_muse/core/constants/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -18,11 +18,7 @@ class CustomButton extends StatelessWidget {
         width: double.infinity,
         height: screenHeight * 0.07,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF7C5FFF), Color(0xFF6B4DFF)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          gradient: AppColors.buttonGradient,
           borderRadius: BorderRadius.circular(screenWidth * 0.05),
         ),
         child: Center(

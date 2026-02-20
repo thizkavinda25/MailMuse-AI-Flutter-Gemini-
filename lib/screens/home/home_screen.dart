@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mail_muse/constants/app_colors.dart';
-import 'package:mail_muse/widgets/bottom_row_buttons.dart';
+import 'package:mail_muse/core/constants/app_colors.dart';
+import 'package:mail_muse/core/utils/custom_routes.dart';
+import 'package:mail_muse/core/widgets/bottom_row_buttons.dart';
+import 'package:mail_muse/core/widgets/top_row_buttons.dart';
+import 'package:mail_muse/screens/auth/login_screen.dart';
+import 'package:mail_muse/screens/auth/signup_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:mail_muse/widgets/custom_app_bar.dart';
-import 'package:mail_muse/widgets/custom_button.dart';
-import 'package:mail_muse/widgets/home_header_text.dart';
-import 'package:mail_muse/widgets/popup_menu.dart';
-import '../providers/email_provider.dart';
+import 'package:mail_muse/core/widgets/custom_app_bar.dart';
+import 'package:mail_muse/core/widgets/custom_button.dart';
+import 'package:mail_muse/core/widgets/home_header_text.dart';
+import 'package:mail_muse/core/widgets/popup_menu.dart';
+import '../../providers/email_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -44,6 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  TopRowButtons(
+                    onLogin: () => CustomRoutes.push(context, LoginScreen()),
+                    onSignin: () => CustomRoutes.push(context, SignupScreen()),
+                  ),
+                  SizedBox(height: 25),
                   const HomeHeaderText(),
                   SizedBox(height: 25),
                   _subText('Select Email Tone'),

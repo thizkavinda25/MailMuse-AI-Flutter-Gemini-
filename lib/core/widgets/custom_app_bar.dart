@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mail_muse/constants/app_colors.dart';
+import 'package:mail_muse/core/constants/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});

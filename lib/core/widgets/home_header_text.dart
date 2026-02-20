@@ -25,7 +25,7 @@ class HomeHeaderText extends StatelessWidget {
           style: GoogleFonts.roboto(
             fontSize: fontSize,
             fontWeight: FontWeight.w600,
-            color: const Color.fromARGB(255, 33, 114, 243),
+            color: const Color.fromARGB(255, 19, 91, 207),
           ),
         ),
       ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mail_muse/constants/app_colors.dart';
+import 'package:mail_muse/core/constants/app_colors.dart';
 import 'package:provider/provider.dart';
-import '../providers/email_provider.dart';
+import '../../providers/email_provider.dart';
 
 class PopupMenu extends StatelessWidget {
   const PopupMenu({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mail_muse/constants/app_colors.dart';
-import 'package:mail_muse/screens/main_body.dart';
+import 'package:mail_muse/core/constants/app_colors.dart';
+import 'package:mail_muse/main_body.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

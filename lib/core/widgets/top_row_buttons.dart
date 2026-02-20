@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:mail_muse/core/constants/app_colors.dart';
 
-class BottomRowButtons extends StatefulWidget {
-  final VoidCallback? onClear;
-  final VoidCallback? onShare;
-  const BottomRowButtons({super.key, this.onClear, this.onShare});
+class TopRowButtons extends StatefulWidget {
+  final VoidCallback? onLogin;
+  final VoidCallback? onSignin;
+  const TopRowButtons({super.key, this.onLogin, this.onSignin});
 
   @override
-  State<BottomRowButtons> createState() => _BottomRowButtonsState();
+  State<TopRowButtons> createState() => _TopRowButtonsState();
 }
 
-class _BottomRowButtonsState extends State<BottomRowButtons> {
+class _TopRowButtonsState extends State<TopRowButtons> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -24,20 +25,20 @@ class _BottomRowButtonsState extends State<BottomRowButtons> {
         children: [
           Expanded(
             child: OutlinedButton.icon(
-              onPressed: widget.onClear,
-              icon: const Icon(Icons.delete_outline, color: Color(0xFF4A5568)),
+              onPressed: widget.onLogin,
+
               label: Text(
-                'Clear',
+                'Login',
                 style: TextStyle(
-                  color: const Color(0xFF4A5568),
+                  color: const Color.fromARGB(255, 33, 114, 243),
                   fontSize: fontSize,
                 ),
               ),
               style: OutlinedButton.styleFrom(
                 padding: EdgeInsets.symmetric(vertical: verticalPadding),
                 side: const BorderSide(
-                  color: Color.fromARGB(255, 207, 207, 212),
-                  width: 1.5,
+                  color: Color.fromARGB(90, 65, 33, 243),
+                  width: 1.7,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -49,21 +50,14 @@ class _BottomRowButtonsState extends State<BottomRowButtons> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [
-                    Color.fromARGB(255, 95, 73, 218),
-                    Color.fromARGB(255, 76, 130, 229),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
+                gradient: AppColors.buttonGradient,
                 borderRadius: BorderRadius.circular(30),
               ),
               child: ElevatedButton.icon(
-                onPressed: widget.onShare,
-                icon: const Icon(Icons.share, color: Colors.white),
+                onPressed: widget.onSignin,
+
                 label: Text(
-                  'Share',
+                  'Sign Up',
                   style: TextStyle(color: Colors.white, fontSize: fontSize),
                 ),
                 style: ElevatedButton.styleFrom(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mail_muse/services/groq_service.dart';
-import 'package:mail_muse/utils/custom_dialogs.dart';
+import 'package:mail_muse/core/utils/custom_dialogs.dart';
 import 'package:share_plus/share_plus.dart';
 
 class EmailProvider extends ChangeNotifier {
