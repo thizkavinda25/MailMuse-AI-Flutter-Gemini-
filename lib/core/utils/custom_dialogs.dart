@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 
 class CustomDialogs {
-  static void showEmptyFieldDialog(BuildContext context) {
+  static void showEmptyFieldDialog(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
+      SnackBar(
         backgroundColor: Colors.redAccent,
-        content: Text('Please enter a topic'),
+        content: Text(message),
+      ),
+    );
+  }
+
+  static void showSucceededDialog(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+        backgroundColor: Colors.green,
+        content: Text(message),
       ),
     );
   }

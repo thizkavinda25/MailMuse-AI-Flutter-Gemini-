@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -18,14 +19,23 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 6), () {
-      if (!mounted) return;
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const MainBody()),
-      );
-    });
+    if (FirebaseAuth.instance.currentUser != null) {
+      Future.delayed(const Duration(seconds: 6), () {
+        if (!mounted) return;
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MainBody()),
+        );
+      });
+    } else {
+      Future.delayed(const Duration(seconds: 6), () {
+        if (!mounted) return;
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MainBody()),
+        );
+      });
+    }
   }
 
   @override
@@ -99,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Text(
-                  'Version 1.0.0',
+                  'Version 1.0.1',
                   style: const TextStyle(color: AppColors.hintTextColor),
                 ),
               ),

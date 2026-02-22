@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mail_muse/core/constants/app_colors.dart';
+import 'package:mail_muse/services/firebase_service.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -18,6 +20,7 @@ class CustomAppBar extends StatelessWidget {
       child: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
+
           mainAxisSize: MainAxisSize.max,
           children: [
             Lottie.asset(
@@ -48,6 +51,21 @@ class CustomAppBar extends StatelessWidget {
                 ],
               ),
             ),
+            Spacer(),
+            if (FirebaseAuth.instance.currentUser != null)
+              TextButton(
+                onPressed: () {
+                  FirebaseService().signOut(context);
+                },
+                child: Text(
+                  'Logout',
+                  style: GoogleFonts.poppins(
+                    color: AppColors.bottomNavSelectColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: isMobile ? 20 : 24,
+                  ),
+                ),
+              ),
           ],
         ),
       ),

@@ -15,34 +15,46 @@ class AuthMethodButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: GestureDetector(
-            onTap: onGoogle,
-            child: _socialButton(
-              icon: Brand(Brands.google, size: 22),
-              text: 'Google',
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isSmallScreen = constraints.maxWidth < 360;
+
+        return Row(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onTap: onGoogle,
+                child: _socialButton(
+                  icon: Brand(Brands.google, size: isSmallScreen ? 18 : 22),
+                  text: 'Google',
+                  isSmall: isSmallScreen,
+                ),
+              ),
             ),
-          ),
-        ),
-        const SizedBox(width: 15),
-        Expanded(
-          child: GestureDetector(
-            onTap: onApple,
-            child: _socialButton(
-              icon: Icon(BoxIcons.bxl_apple, size: 22),
-              text: 'Apple',
+            const SizedBox(width: 15),
+            Expanded(
+              child: GestureDetector(
+                onTap: onApple,
+                child: _socialButton(
+                  icon: Icon(BoxIcons.bxl_apple, size: isSmallScreen ? 18 : 22),
+                  text: 'Apple',
+                  isSmall: isSmallScreen,
+                ),
+              ),
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 
-  Widget _socialButton({required Widget icon, required String text}) {
+  Widget _socialButton({
+    required Widget icon,
+    required String text,
+    required bool isSmall,
+  }) {
     return Container(
-      height: 50,
+      height: isSmall ? 45 : 50,
       decoration: BoxDecoration(
         color: AppColors.primary,
         border: Border.all(color: AppColors.textFieldBorder),
@@ -56,7 +68,7 @@ class AuthMethodButtons extends StatelessWidget {
           Text(
             text,
             style: GoogleFonts.poppins(
-              fontSize: 14,
+              fontSize: isSmall ? 12 : 14,
               fontWeight: FontWeight.w500,
             ),
           ),

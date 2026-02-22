@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -48,11 +49,18 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TopRowButtons(
-                    onLogin: () => CustomRoutes.push(context, LoginScreen()),
-                    onSignin: () => CustomRoutes.push(context, SignupScreen()),
-                  ),
-                  SizedBox(height: 25),
+                  if (FirebaseAuth.instance.currentUser == null)
+                    Padding(
+                      padding: FirebaseAuth.instance.currentUser == null
+                          ? const EdgeInsets.only(bottom: 20)
+                          : EdgeInsets.zero,
+                      child: TopRowButtons(
+                        onLogin: () =>
+                            CustomRoutes.push(context, LoginScreen()),
+                        onSignin: () =>
+                            CustomRoutes.push(context, SignupScreen()),
+                      ),
+                    ),
                   const HomeHeaderText(),
                   SizedBox(height: 25),
                   _subText('Select Email Tone'),
@@ -95,6 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     },
                   ),
+                  SizedBox(height: 20),
+
                   SizedBox(height: 30),
                   if (provider.generatedEmail.isNotEmpty)
                     _subText('Generated Email'),

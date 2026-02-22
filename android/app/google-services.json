@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1025850991492",
+    "project_id": "mailmuse-ai-17575",
+    "storage_bucket": "mailmuse-ai-17575.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025850991492:android:87cc2e583bb740ba8f73d1",
+        "android_client_info": {
+          "package_name": "app.ai.mailmuse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG5XsaMUxtIBMC3VzTkXweD-uPkLjlDhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mail_muse/core/constants/app_colors.dart';
+import 'package:mail_muse/core/utils/custom_routes.dart';
+import 'package:mail_muse/screens/auth/reset_password_screen.dart';
 
 class CustomTextfield extends StatefulWidget {
   final String labelText;
@@ -8,6 +10,7 @@ class CustomTextfield extends StatefulWidget {
   final IconData prefixIcon;
   final TextEditingController? controller;
   final bool isPassword;
+  final bool showForgotPassword;
 
   const CustomTextfield({
     super.key,
@@ -16,6 +19,7 @@ class CustomTextfield extends StatefulWidget {
     required this.prefixIcon,
     this.controller,
     this.isPassword = false,
+    this.showForgotPassword = false,
   });
 
   @override
@@ -96,14 +100,17 @@ class _CustomTextfieldState extends State<CustomTextfield> {
             obscureText: widget.isPassword && isObscureText,
             controller: widget.controller,
           ),
-          if (widget.isPassword == true)
+          if (widget.showForgotPassword == true)
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  CustomRoutes.push(context, ResetPasswordScreen());
+                },
                 child: Text(
                   'Forgot Password?',
                   style: poppins.copyWith(
+                    fontWeight: FontWeight.w600,
                     color: AppColors.bottomNavSelectColor,
                     fontSize: isSmallScreen ? 12 : 14,
                   ),

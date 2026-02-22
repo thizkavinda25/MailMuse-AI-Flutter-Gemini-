@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mail_muse/core/constants/app_colors.dart';
 
@@ -13,7 +14,15 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: Center(child: Text('This page is under development')),
+      body: Center(
+        child: Text(
+          FirebaseAuth.instance.currentUser != null
+              ? 'This page is under development, stay tuned for updates!'
+              : 'Please log in to view your history',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 18, color: AppColors.black),
+        ),
+      ),
     );
   }
 }

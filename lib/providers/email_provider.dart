@@ -21,7 +21,7 @@ class EmailProvider extends ChangeNotifier {
 
   Future<void> generateEmail(String topic, BuildContext context) async {
     if (topic.trim().isEmpty) {
-      CustomDialogs.showEmptyFieldDialog(context);
+      CustomDialogs.showEmptyFieldDialog(context, 'Please enter a topic');
       return;
     }
 

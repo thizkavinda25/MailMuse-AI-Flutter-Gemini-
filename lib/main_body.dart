@@ -16,6 +16,7 @@ class _MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadiusGeometry.only(
           topLeft: Radius.circular(25),
