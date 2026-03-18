@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1025850991492-5b5f9kklcvlkcf2u6tqejb36e94ohahk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.ai.mailmuse",
+            "certificate_hash": "cb65ecc19b390d7464bc8cd31e559e7bfed74358"
+          }
+        },
+        {
           "client_id": "1025850991492-r8uf9p5fv0potfvrmkld24dfm6vn937u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

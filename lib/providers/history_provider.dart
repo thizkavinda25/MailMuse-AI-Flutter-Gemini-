@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mail_muse/models/email_model.dart';
 import 'package:mail_muse/services/firebase_service.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HistoryProvider extends ChangeNotifier {
   List<EmailModel> _emails = [];
@@ -39,4 +40,14 @@ class HistoryProvider extends ChangeNotifier {
     _emails.removeWhere((e) => e.id == emailId);
     notifyListeners();
   }
+
+  Future<void> shareEmail(EmailModel email) async {
+  await Share.share(
+    email.generatedEmail,
+    subject: email.topic,
+  );
+}
+
+
+
 }

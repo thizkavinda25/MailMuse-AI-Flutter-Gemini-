@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:mail_muse/core/constants/app_colors.dart';
 import 'package:mail_muse/models/email_model.dart';
-import 'package:mail_muse/providers/email_provider.dart';
 import 'package:mail_muse/providers/history_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -354,12 +353,7 @@ class EmailDetailScreen extends StatelessWidget {
               const SizedBox(height: 12),
 
               GestureDetector(
-                onTap: () {
-                  Provider.of<EmailProvider>(
-                    context,
-                    listen: false,
-                  ).shareGeneratedEmail(context);
-                },
+                onTap: () => context.read<HistoryProvider>().shareEmail(email),
                 child: Container(
                   width: double.infinity,
                   height: 52,

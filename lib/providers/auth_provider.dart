@@ -145,9 +145,10 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // Google sign-in — no form validation needed
   Future<void> signinWithGoogle(BuildContext context) async {
     try {
+      _startLoading("Signing in with Google...");
+
       final userCredential = await FirebaseService().signInWithGoogle();
       if (userCredential == null) return;
       if (!context.mounted) return;
@@ -158,6 +159,8 @@ class AuthProvider extends ChangeNotifier {
         context,
         'Google Sign-In failed. Please try again.',
       );
+    } finally {
+      _stopLoading();
     }
   }
 
