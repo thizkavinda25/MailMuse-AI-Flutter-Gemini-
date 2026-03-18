@@ -12,7 +12,20 @@
           "package_name": "app.ai.mailmuse"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1025850991492-r8uf9p5fv0potfvrmkld24dfm6vn937u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.ai.mailmuse",
+            "certificate_hash": "f188a55576d26aebf71085de92cd1cfe21373019"
+          }
+        },
+        {
+          "client_id": "1025850991492-phldtodhonka4d5ttiplovve8s5o9o0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDG5XsaMUxtIBMC3VzTkXweD-uPkLjlDhQ"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025850991492-phldtodhonka4d5ttiplovve8s5o9o0f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1025850991492-9stjtmu0sdoojo143tco6jfkle7gqhi1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mailMuse"
+              }
+            }
+          ]
         }
       }
     }

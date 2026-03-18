@@ -16,7 +16,6 @@ class _MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadiusGeometry.only(
           topLeft: Radius.circular(25),
@@ -24,7 +23,7 @@ class _MainBodyState extends State<MainBody> {
         ),
         child: BottomNavigationBar(
           selectedItemColor: AppColors.buttonGradient.colors.last,
-          unselectedItemColor: AppColors.black,
+          unselectedItemColor: AppColors.bottomNavIconColor,
           backgroundColor: AppColors.primary,
           currentIndex: currentIndex,
 
@@ -39,13 +38,12 @@ class _MainBodyState extends State<MainBody> {
           },
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_filled),
+              icon: Icon(Icons.home),
               label: 'Home',
-
               activeIcon: Icon(Icons.home),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.history_toggle_off),
+              icon: Icon(Icons.history),
               label: 'History',
               activeIcon: Icon(Icons.history),
             ),

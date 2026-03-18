@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mail_muse/models/email_model.dart';
+import 'package:mail_muse/services/firebase_service.dart';
 import 'package:mail_muse/services/groq_service.dart';
 import 'package:mail_muse/core/utils/custom_dialogs.dart';
 import 'package:share_plus/share_plus.dart';
@@ -34,6 +37,18 @@ class EmailProvider extends ChangeNotifier {
         topic: topic,
         tone: _selectedTone,
       );
+
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null && _generatedEmail.isNotEmpty) {
+        await FirebaseService().saveEmailToHistory(
+          uid: user.uid,
+          email: EmailModel(
+            tone: _selectedTone,
+            topic: topic,
+            generatedEmail: _generatedEmail,
+          ),
+        );
+      }
     } catch (e) {
       _generatedEmail = "Something went wrong.";
     } finally {

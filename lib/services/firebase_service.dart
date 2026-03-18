@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -5,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
 import 'package:mail_muse/core/utils/custom_dialogs.dart';
 import 'package:mail_muse/core/utils/custom_routes.dart';
+import 'package:mail_muse/models/email_model.dart';
 import 'package:mail_muse/screens/auth/login_screen.dart';
 
 class FirebaseService {
@@ -79,5 +81,41 @@ class FirebaseService {
     );
 
     return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  Future<void> saveEmailToHistory({
+    required String uid,
+    required EmailModel email,
+  }) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('emailHistory')
+        .add(email.toMap());
+  }
+
+  Future<List<EmailModel>> fetchEmailHistory(String uid) async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('emailHistory')
+        .orderBy('createdAt', descending: true)
+        .get();
+
+    return snapshot.docs
+        .map((doc) => EmailModel.fromMap(doc.id, doc.data()))
+        .toList();
+  }
+
+  Future<void> deleteEmailFromHistory({
+    required String uid,
+    required String emailId,
+  }) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('emailHistory')
+        .doc(emailId)
+        .delete();
   }
 }

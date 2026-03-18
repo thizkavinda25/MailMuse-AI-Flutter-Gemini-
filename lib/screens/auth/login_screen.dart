@@ -46,89 +46,94 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         child: ConstrainedBox(
                           constraints: BoxConstraints(minHeight: screenHeight),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(height: screenHeight * 0.05),
+                          child: Form(
+                            key: authProvider.signInFormKey,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(height: screenHeight * 0.05),
 
-                              AuthHeaderText(
-                                greetText: 'Welcome Back',
-                                subText:
-                                    'Login to continue generating instant email',
-                              ),
+                                AuthHeaderText(
+                                  greetText: 'Welcome Back',
+                                  subText:
+                                      'Login to continue generating instant email',
+                                ),
 
-                              SizedBox(height: screenHeight * 0.04),
+                                SizedBox(height: screenHeight * 0.04),
 
-                              CustomTextfield(
-                                labelText: 'Email Address',
-                                prefixIcon: Icons.mail,
-                                hintText: 'name@company.com',
-                                controller: authProvider.emailController,
-                              ),
+                                CustomTextfield(
+                                  labelText: 'Email Address',
+                                  prefixIcon: Icons.mail,
+                                  hintText: 'name@company.com',
+                                  controller: authProvider.emailController,
+                                  validator: authProvider.validateEmail,
+                                ),
 
-                              CustomTextfield(
-                                labelText: 'Password',
-                                prefixIcon: CupertinoIcons.padlock_solid,
-                                hintText: '',
-                                isPassword: true,
-                                showForgotPassword: true,
-                                controller: authProvider.passwordController,
-                              ),
+                                CustomTextfield(
+                                  labelText: 'Password',
+                                  prefixIcon: CupertinoIcons.padlock_solid,
+                                  hintText: '',
+                                  isPassword: true,
+                                  showForgotPassword: true,
+                                  controller: authProvider.passwordController,
+                                  validator: authProvider.validatePassword,
+                                ),
 
-                              CustomButton(
-                                text: 'Login',
-                                onTap: () {
-                                  authProvider.signIn(context);
-                                },
-                              ),
+                                CustomButton(
+                                  text: 'Login',
+                                  onTap: () {
+                                    authProvider.signIn(context);
+                                  },
+                                ),
 
-                              SizedBox(height: screenHeight * 0.02),
+                                SizedBox(height: screenHeight * 0.02),
 
-                              DividerRow(),
+                                DividerRow(),
 
-                              SizedBox(height: screenHeight * 0.025),
+                                SizedBox(height: screenHeight * 0.025),
 
-                              AuthMethodButtons(
-                                onGoogle: () {
-                                  authProvider.signinWithGoogle(context);
-                                },
-                                onApple: () {},
-                              ),
+                                AuthMethodButtons(
+                                  onGoogle: () {
+                                    authProvider.signinWithGoogle(context);
+                                  },
+                                  onApple: () {},
+                                ),
 
-                              SizedBox(height: screenHeight * 0.02),
+                                SizedBox(height: screenHeight * 0.02),
 
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Don\'t have an account?',
-                                    style: GoogleFonts.poppins(
-                                      color: AppColors.hintTextColor,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: isSmallScreen ? 12 : 14,
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      CustomRoutes.push(
-                                        context,
-                                        const SignupScreen(),
-                                      );
-                                    },
-                                    child: Text(
-                                      'Sign Up',
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Don\'t have an account?',
                                       style: GoogleFonts.poppins(
-                                        color: AppColors.bottomNavSelectColor,
+                                        color: AppColors.hintTextColor,
                                         fontWeight: FontWeight.w600,
                                         fontSize: isSmallScreen ? 12 : 14,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
+                                    TextButton(
+                                      onPressed: () {
+                                        CustomRoutes.push(
+                                          context,
+                                          const SignupScreen(),
+                                        );
+                                      },
+                                      child: Text(
+                                        'Sign Up',
+                                        style: GoogleFonts.poppins(
+                                          color: AppColors.bottomNavSelectColor,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: isSmallScreen ? 12 : 14,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
 
-                              SizedBox(height: screenHeight * 0.05),
-                            ],
+                                SizedBox(height: screenHeight * 0.05),
+                              ],
+                            ),
                           ),
                         ),
                       );

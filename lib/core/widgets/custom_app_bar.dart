@@ -53,16 +53,17 @@ class CustomAppBar extends StatelessWidget {
             ),
             Spacer(),
             if (FirebaseAuth.instance.currentUser != null)
-              TextButton(
-                onPressed: () {
+              GestureDetector(
+                onTap: () {
                   FirebaseService().signOut(context);
                 },
-                child: Text(
-                  'Logout',
-                  style: GoogleFonts.poppins(
+                child: CircleAvatar(
+                  radius: isMobile ? 18 : 22,
+                  backgroundColor: AppColors.background,
+                  child: Icon(
+                    Icons.person,
                     color: AppColors.bottomNavSelectColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: isMobile ? 20 : 24,
+                    size: isMobile ? 18 : 22,
                   ),
                 ),
               ),

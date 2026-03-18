@@ -11,6 +11,7 @@ class CustomTextfield extends StatefulWidget {
   final TextEditingController? controller;
   final bool isPassword;
   final bool showForgotPassword;
+  final String? Function(String?)? validator; // ✅ Added validator
 
   const CustomTextfield({
     super.key,
@@ -20,6 +21,7 @@ class CustomTextfield extends StatefulWidget {
     this.controller,
     this.isPassword = false,
     this.showForgotPassword = false,
+    this.validator,
   });
 
   @override
@@ -36,7 +38,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
     final isSmallScreen = screenWidth < 400;
 
     return Padding(
-      padding: EdgeInsets.only(bottom: screenWidth * 0.06),
+      padding: EdgeInsets.only(bottom: screenWidth * 0.04),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -49,7 +51,12 @@ class _CustomTextfieldState extends State<CustomTextfield> {
             ),
           ),
           SizedBox(height: screenWidth * 0.025),
-          TextField(
+          TextFormField(
+            controller: widget.controller,
+            obscureText: widget.isPassword && isObscureText,
+            validator: widget.validator,
+            onTapOutside: (_) => FocusScope.of(context).unfocus(),
+            cursorColor: AppColors.hintTextColor,
             decoration: InputDecoration(
               filled: true,
               fillColor: AppColors.textFieldBackground,
@@ -57,6 +64,8 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                 horizontal: screenWidth * 0.04,
                 vertical: screenWidth * 0.035,
               ),
+
+              // ── Normal border ──────────────────────────────
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
                 borderSide: BorderSide(
@@ -71,6 +80,30 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                   color: AppColors.textFieldBorder,
                 ),
               ),
+
+              // ── Error borders in red ───────────────────────
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15.0),
+                borderSide: const BorderSide(
+                  width: 1.2,
+                  color: Colors.redAccent,
+                ),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15.0),
+                borderSide: const BorderSide(
+                  width: 1.5,
+                  color: Colors.redAccent,
+                ),
+              ),
+
+              // ── Error text style ───────────────────────────
+              errorStyle: poppins.copyWith(
+                color: Colors.redAccent,
+                fontSize: isSmallScreen ? 11 : 12,
+                fontWeight: FontWeight.w500,
+              ),
+
               prefixIcon: Icon(
                 widget.prefixIcon,
                 color: AppColors.prefixIconColor,
@@ -79,13 +112,11 @@ class _CustomTextfieldState extends State<CustomTextfield> {
               suffixIcon: widget.isPassword
                   ? IconButton(
                       onPressed: () {
-                        setState(() {
-                          isObscureText = !isObscureText;
-                        });
+                        setState(() => isObscureText = !isObscureText);
                       },
                       icon: Icon(
-                        color: AppColors.prefixIconColor,
                         isObscureText ? Icons.visibility : Icons.visibility_off,
+                        color: AppColors.prefixIconColor,
                         size: isSmallScreen ? 20 : 24,
                       ),
                     )
@@ -93,20 +124,13 @@ class _CustomTextfieldState extends State<CustomTextfield> {
               hintText: widget.hintText,
               hintStyle: poppins.copyWith(color: AppColors.hintTextColor),
             ),
-            onTapOutside: (_) {
-              FocusScope.of(context).unfocus();
-            },
-            cursorColor: AppColors.hintTextColor,
-            obscureText: widget.isPassword && isObscureText,
-            controller: widget.controller,
           ),
-          if (widget.showForgotPassword == true)
+          if (widget.showForgotPassword)
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {
-                  CustomRoutes.push(context, ResetPasswordScreen());
-                },
+                onPressed: () =>
+                    CustomRoutes.push(context, ResetPasswordScreen()),
                 child: Text(
                   'Forgot Password?',
                   style: poppins.copyWith(

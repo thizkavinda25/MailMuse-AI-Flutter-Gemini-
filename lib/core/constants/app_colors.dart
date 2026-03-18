@@ -15,7 +15,7 @@ class AppColors {
   static const Color textFieldBackground = Color.fromARGB(16, 160, 221, 241);
   static const Color prefixIconColor =Color.fromARGB(255, 160, 174, 178);
   static const Color textFieldBorder = Color.fromARGB(247, 224, 224, 224);
-  
+  static const Color bottomNavIconColor = Color.fromRGBO(66, 66, 66, 1);
   static const LinearGradient buttonGradient = LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,

@@ -38,93 +38,109 @@ class _SignupScreenState extends State<SignupScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 25),
                         child: AuthHeaderText(
                           greetText: 'Create Account',
-                          subText: 'Join us to start generating professional email',
+                          subText:
+                              'Join us to start generating professional email',
                         ),
                       ),
-              
+
                       SizedBox(height: 20),
                       Expanded(
                         child: SingleChildScrollView(
                           padding: const EdgeInsets.symmetric(horizontal: 25),
                           keyboardDismissBehavior:
                               ScrollViewKeyboardDismissBehavior.onDrag,
-                          child: Column(
-                            children: [
-                              CustomTextfield(
-                                labelText: 'Name',
-                                prefixIcon: Icons.person_2,
-                                hintText: 'Your Name',
-                                controller: authProvider.nameController,
-                              ),
-              
-                              CustomTextfield(
-                                labelText: 'Email Address',
-                                prefixIcon: Icons.mail,
-                                hintText: 'name@company.com',
-                                controller: authProvider.emailController,
-                              ),
-              
-                              CustomTextfield(
-                                labelText: 'Password',
-                                prefixIcon: CupertinoIcons.padlock_solid,
-                                hintText: '',
-                                isPassword: true,
-                                controller: authProvider.passwordController,
-                              ),
-              
-                              CustomTextfield(
-                                labelText: 'Confirm Password',
-                                prefixIcon: CupertinoIcons.padlock_solid,
-                                hintText: '',
-                                isPassword: true,
-                                controller: authProvider.confirmPasswordController,
-                              ),
-              
-                              CustomButton(
-                                text: 'Sign Up',
-                                onTap: () {
-                                  authProvider.signUp(context);
-                                },
-                              ),
-              
-                              SizedBox(height: 20),
-              
-                              DividerRow(),
-              
-                              SizedBox(height: 20),
-              
-                              AuthMethodButtons(onGoogle: () {
-                                authProvider.signinWithGoogle(context);
-                              }, onApple: () {}),
-              
-                              SizedBox(height: 20),
-              
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Already have an account?',
-                                    style: GoogleFonts.poppins(
-                                      color: AppColors.hintTextColor,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      CustomRoutes.push(context, LoginScreen());
-                                    },
-                                    child: Text(
-                                      'Sign In',
+                          child: Form(
+                            key: authProvider.signUpFormKey,
+                            child: Column(
+                              children: [
+                                CustomTextfield(
+                                  labelText: 'Name',
+                                  prefixIcon: Icons.person_2,
+                                  hintText: 'Your Name',
+                                  controller: authProvider.nameController,
+                                  validator: authProvider.validateName,
+                                ),
+
+                                CustomTextfield(
+                                  labelText: 'Email Address',
+                                  prefixIcon: Icons.mail,
+                                  hintText: 'name@company.com',
+                                  controller: authProvider.emailController,
+                                  validator: authProvider.validateEmail,
+                                ),
+
+                                CustomTextfield(
+                                  labelText: 'Password',
+                                  prefixIcon: CupertinoIcons.padlock_solid,
+                                  hintText: '',
+                                  isPassword: true,
+                                  controller: authProvider.passwordController,
+                                  validator: authProvider.validatePassword,
+                                ),
+
+                                CustomTextfield(
+                                  labelText: 'Confirm Password',
+                                  prefixIcon: CupertinoIcons.padlock_solid,
+                                  hintText: '',
+                                  isPassword: true,
+                                  controller:
+                                      authProvider.confirmPasswordController,
+                                  validator:
+                                      authProvider.validateConfirmPassword,
+                                ),
+
+                                CustomButton(
+                                  text: 'Sign Up',
+                                  onTap: () {
+                                    authProvider.signUp(context);
+                                  },
+                                ),
+
+                                SizedBox(height: 20),
+
+                                DividerRow(),
+
+                                SizedBox(height: 20),
+
+                                AuthMethodButtons(
+                                  onGoogle: () {
+                                    authProvider.signinWithGoogle(context);
+                                  },
+                                  onApple: () {},
+                                ),
+
+                                SizedBox(height: 20),
+
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Already have an account?',
                                       style: GoogleFonts.poppins(
-                                        color: AppColors.bottomNavSelectColor,
+                                        color: AppColors.hintTextColor,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 30),
-                            ],
+                                    TextButton(
+                                      onPressed: () {
+                                        CustomRoutes.push(
+                                          context,
+                                          LoginScreen(),
+                                        );
+                                      },
+                                      child: Text(
+                                        'Sign In',
+                                        style: GoogleFonts.poppins(
+                                          color: AppColors.bottomNavSelectColor,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 30),
+                              ],
+                            ),
                           ),
                         ),
                       ),

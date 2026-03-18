@@ -32,37 +32,44 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: width * 0.07),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AuthHeaderText(
-                          greetText: 'Reset Password',
-                          subText: 'Enter email for send password reset link',
-                        ),
-                        SizedBox(height: height * 0.06),
-                        CustomTextfield(
-                          labelText: 'Email',
-                          hintText: 'name@company.com',
-                          prefixIcon: Icons.email,
-                          controller: authProvider.emailController,
-                        ),
-                        SizedBox(height: height * 0.04),
-                        CustomButton(
-                          text: 'Send',
-                          onTap: () {
-                            authProvider.resetPassword(context);
-                          },
-                        ),
-                        SizedBox(height: height * 0.04),
-                        DividerRow(),
-                        SizedBox(height: height * 0.04),
-                        CustomButton(
-                          text: 'Remember Me',
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ],
+                    child: Form(
+                      key: authProvider.resetFormKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AuthHeaderText(
+                            greetText: 'Reset Password',
+                            subText: 'Enter email for send password reset link',
+                          ),
+                          SizedBox(height: height * 0.06),
+                          CustomTextfield(
+                            labelText: 'Email',
+                            hintText: 'name@company.com',
+                            prefixIcon: Icons.email,
+                            controller: authProvider.emailController,
+                            validator: authProvider.validateEmail,
+                          ),
+                          SizedBox(height: height * 0.04),
+                          CustomButton(
+                            text: 'Send',
+                            onTap: () {
+                              if (authProvider.resetFormKey.currentState!
+                                  .validate()) {
+                                authProvider.resetPassword(context);
+                              }
+                            },
+                          ),
+                          SizedBox(height: height * 0.04),
+                          DividerRow(),
+                          SizedBox(height: height * 0.04),
+                          CustomButton(
+                            text: 'Remember Me',
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

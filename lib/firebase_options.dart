@@ -63,6 +63,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1025850991492',
     projectId: 'mailmuse-ai-17575',
     storageBucket: 'mailmuse-ai-17575.firebasestorage.app',
+    androidClientId: '1025850991492-r8uf9p5fv0potfvrmkld24dfm6vn937u.apps.googleusercontent.com',
+    iosClientId: '1025850991492-9stjtmu0sdoojo143tco6jfkle7gqhi1.apps.googleusercontent.com',
     iosBundleId: 'com.example.mailMuse',
   );
+
 }

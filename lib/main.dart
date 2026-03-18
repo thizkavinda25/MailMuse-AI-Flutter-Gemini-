@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mail_muse/providers/auth_provider.dart';
+import 'package:mail_muse/providers/history_provider.dart';
 import 'package:mail_muse/screens/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mail_muse/providers/email_provider.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => EmailProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => HistoryProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
